@@ -1,7 +1,6 @@
 .DS_Store
 Thumbs.db
 node_modules/
-app/bower_components/
 app/dist/
 dist/
 releases/
@@ -9,3 +8,4 @@ npm-debug.log*
 selenium-debug.log
 test/unit/coverage
 test/e2e/reports
+app/bower_components
