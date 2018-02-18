@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "comments": false,
   "env": {
     "test": {
@@ -37,9 +36,4 @@
     }
   },
   "plugins": ["transform-runtime"]
-=======
-  "presets": ["es2015", "stage-2"],
-  "plugins": ["transform-runtime"],
-  "comments": false
->>>>>>> 739c595db1d22212269627b904401bc9334d5a81
 }

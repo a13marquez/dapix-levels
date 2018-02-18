@@ -1,6 +1,6 @@
 {
-  "name": "dapix-levels2",
-  "productName": "dapix-levels2",
+  "name": "dapix-levels",
+  "productName": "dapix-levels",
   "version": "0.0.0",
   "author": "Álvaro Márquez <marquezalvaro13@gmail.com>",
   "description": "Level editor",
@@ -16,12 +16,14 @@
     "build:web": "cross-env BUILD_TARGET=web node .electron-vue/build.js",
     "dev": "node .electron-vue/dev-runner.js",
     "e2e": "npm run pack && mocha test/e2e",
+    "lint": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter src test",
+    "lint:fix": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter --fix src test",
     "pack": "npm run pack:main && npm run pack:renderer",
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
     "test": "npm run unit && npm run e2e",
     "unit": "karma start test/unit/karma.conf.js",
-    "postinstall": ""
+    "postinstall": "npm run lint:fix"
   },
   "dependencies": {
     "jquery": "^3.3.1",
@@ -30,6 +32,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
+    "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.1",
     "babel-plugin-istanbul": "^4.1.1",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -50,6 +53,10 @@
     "electron-devtools-installer": "^2.2.0",
     "electron-packager": "^8.5.0",
     "electron-rebuild": "^1.1.3",
+    "eslint": "^4.4.1",
+    "eslint-friendly-formatter": "^3.0.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-html": "^3.1.1",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.30.1",

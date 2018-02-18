@@ -1,4 +1,4 @@
-# dapix-levels2
+# dapix-levels
 
 > Level editor
 
@@ -17,6 +17,9 @@ npm run build
 # run unit & end-to-end tests
 npm test
 
+
+# lint all JS/Vue component files in `src/`
+npm run lint
 
 ```
 
