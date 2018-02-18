@@ -1,4 +1,5 @@
 .DS_Store
+<<<<<<< HEAD
 dist/electron/*
 dist/web/*
 build/*
@@ -9,3 +10,15 @@ npm-debug.log
 npm-debug.log.*
 thumbs.db
 !.gitkeep
+=======
+Thumbs.db
+node_modules/
+app/dist/
+dist/
+releases/
+npm-debug.log*
+selenium-debug.log
+test/unit/coverage
+test/e2e/reports
+app/bower_components
+>>>>>>> 739c595db1d22212269627b904401bc9334d5a81
