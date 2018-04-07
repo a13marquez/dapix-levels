@@ -34,22 +34,78 @@
    <div>
         <div class="levelContainer">
         <div class="levelPane">
-            <canvas class="levelCanvas"
+            <canvas id="levelCnv" class="levelCanvas"
                 v-bind:style="{ width: level.width + 'px', height: level.height + 'px' }"
                 v-bind:width="level.width"
                 v-bind:height="level.height"
             ></canvas>
         </div>
     </div>
-    <tool-select :zoom="zoom" :selection="selection" :level="level" :stage="stage" :helper="selectionLayer" :tileset="tileset" ref="tool-select"></tool-select>
-    <tool-move :zoom="zoom" :selection="selection" :level="level" :stage="stage" :helper="selectionLayer" :tileset="tileset" ref="tool-move"></tool-move>
-    <tool-brush :zoom="zoom" :level="level" :stage="stage" :helper="helper" :tileset="tileset" ref="tool-brush"></tool-brush>
-    <tool-eraser :zoom="zoom" :level="level" :stage="stage" :helper="helper" :tileset="tileset" ref="tool-eraser"></tool-eraser>
-    <tool-eyedropper :zoom="zoom" :level="level" :stage="stage" :tileset="tileset" ref="tool-eyedropper"></tool-eyedropper>
-    <tool-line :zoom="zoom" :level="level" :stage="stage" :helper="helper" :tileset="tileset" ref="tool-line"></tool-line>
-    <tool-rectangle :zoom="zoom" :level="level" :stage="stage" :helper="helper" :tileset="tileset" ref="tool-rectangle"></tool-rectangle>
-    <tool-ellipse :zoom="zoom" :level="level" :stage="stage" :helper="helper" :tileset="tileset" ref="tool-ellipse"></tool-ellipse>
-    <tool-fill :zoom="zoom" :level="level" :stage="stage" :helper="helper" :tileset="tileset" ref="tool-fill"></tool-fill>   </div>
+    <tool-select 
+        v-bind:zoom="zoom" 
+        v-bind:selection="selection" 
+        v-bind:level="level" 
+        v-bind:stage="stage" 
+        v-bind:helper="selectionLayer" 
+        v-bind:tileset="tileset" 
+        ref="tool-select"></tool-select>
+    <tool-move 
+        v-bind:zoom="zoom" 
+        v-bind:selection="selection" 
+        v-bind:level="level" 
+        v-bind:stage="stage" 
+        v-bind:helper="selectionLayer" 
+        v-bind:tileset="tileset" 
+        ref="tool-move"></tool-move>
+    <tool-brush 
+        v-bind:zoom="zoom" 
+        v-bind:level="level" 
+        v-bind:stage="stage" 
+        v-bind:helper="helper" 
+        v-bind:tileset="tileset" 
+        ref="tool-brush"></tool-brush>
+    <tool-eraser 
+        v-bind:zoom="zoom" 
+        v-bind:level="level" 
+        v-bind:stage="stage" 
+        v-bind:helper="helper" 
+        v-bind:tileset="tileset" 
+        ref="tool-eraser"></tool-eraser>
+    <tool-eyedropper 
+        v-bind:zoom="zoom" 
+        v-bind:level="level" 
+        v-bind:stage="stage" 
+        v-bind:tileset="tileset" 
+        ref="tool-eyedropper"></tool-eyedropper>
+    <tool-line 
+        v-bind:zoom="zoom" 
+        v-bind:level="level" 
+        v-bind:stage="stage" 
+        v-bind:helper="helper" 
+        v-bind:tileset="tileset" 
+        ref="tool-line"></tool-line>
+    <tool-rectangle 
+        v-bind:zoom="zoom" 
+        v-bind:level="level" 
+        v-bind:stage="stage" 
+        v-bind:helper="helper" 
+        v-bind:tileset="tileset" 
+        ref="tool-rectangle"></tool-rectangle>
+    <tool-ellipse 
+        v-bind:zoom="zoom" 
+        v-bind:level="level" 
+        v-bind:stage="stage" 
+        v-bind:helper="helper" 
+        v-bind:tileset="tileset" 
+        ref="tool-ellipse"></tool-ellipse>
+    <tool-fill 
+        v-bind:zoom="zoom" 
+        v-bind:level="level" 
+        v-bind:stage="stage" 
+        v-bind:helper="helper" 
+        v-bind:tileset="tileset" 
+        ref="tool-fill"></tool-fill>   
+    </div>
 </template>
 
 <script>
@@ -109,7 +165,8 @@ export default {
     methods: {
 
         initialize() {
-            this.stage = new createjs.Stage($('.levelCanvas')[0]);
+            debugger;
+            this.stage = new createjs.Stage('levelCnv');
             this.stage.enableMouseOver(2);
             this.stage.on('stagemousemove', this.onStageMouseMove);
             this.stage.on('stagemousedown', this.onStageMouseDown);
@@ -120,8 +177,9 @@ export default {
         },
 
         createDrawLayer() {
+            debugger;
             this.draw = new createjs.Container();
-
+            debugger;
             for (var i = 0; i < this.level.layers.length; i++) {
                 this.draw.addChild(this.level.layers[i].draw);
             }

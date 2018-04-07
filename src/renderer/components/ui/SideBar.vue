@@ -24,16 +24,16 @@
         <div class="sidebarPane">
 
             <zoom-panel
-            :level="level"
+            v-bind:level="level"
             ></zoom-panel>
 
             <layers-panel
-            :level="level"
+            v-bind:level="level"
             ></layers-panel>
 
             <properties-panel
-            :tileset="tileset"
-            :level="level"
+            v-bind:tileset="tileset"
+            v-bind:level="level"
             ></properties-panel>
 
         </div>

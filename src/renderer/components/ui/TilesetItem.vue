@@ -29,9 +29,12 @@
 
 <template>
 
-<div v-bind:id="'tile-' + id" class="tile" v-bind:class="{ 'selected': selected }">
-    <img :src="tile.image" :title="tile.ID" />
-</div>
+    <div 
+      v-bind:id="'tile-' + id" 
+      class="tile" 
+      v-bind:class="{ 'selected': selected }">
+        <img :src="tile.image" :title="tile.ID" />
+    </div>
 
 </template>
 

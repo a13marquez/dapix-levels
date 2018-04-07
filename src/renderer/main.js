@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './App';
 import $ from 'jquery';
+require('bootstrap');
 
 window.$ = $;
 
@@ -8,7 +9,7 @@ if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-new Vue({
+const vue = new Vue({
   components: { App },
   template: '<App/>'
 }).$mount('#app')
@@ -31,24 +32,27 @@ const template = [
         label: 'Level',
         submenu: [
             { label: 'New Level', click(item, focusedWindow) {
-                if (focusedWindow) vue.$refs.app.newLevel();
+                if (focusedWindow) {
+                    debugger; 
+                    vue.$children[0].newLevel();
+                    }
             }},
             { label: 'Open Level...', click(item, focusedWindow) {
-                if (focusedWindow) vue.$refs.app.openLevel();
+                if (focusedWindow) vue.$children[0].openLevel();
             }},
             { type: 'separator' },
             { label: 'Save', click(item, focusedWindow) {
-                if (focusedWindow) vue.$refs.app.saveLevel();
+                if (focusedWindow) vue.$children[0].saveLevel();
             }},
             { label: 'Save as...', click(item, focusedWindow) {
-                if (focusedWindow) vue.$refs.app.saveLevelAs();
+                if (focusedWindow) vue.$children[0].saveLevelAs();
             }},
             { type: 'separator' },
             { label: 'Export JSON...', click(item, focusedWindow) {
-                if (focusedWindow) vue.$refs.app.exportJSONAs();
+                if (focusedWindow) vue.$children[0].exportJSONAs();
             } },
             { label: 'Export PNG...', click(item, focusedWindow) {
-                if (focusedWindow) vue.$refs.app.exportPNG();
+                if (focusedWindow) vue.$children[0].exportPNG();
             } },
             { type: 'separator' },
             { label: 'Options...' }
@@ -57,17 +61,17 @@ const template = [
         label: 'Tileset',
         submenu: [
             { label: 'New Tileset', click(item, focusedWindow) {
-                if (focusedWindow) vue.$refs.app.$refs.tilesetBar.newTileset();
+                if (focusedWindow) vue.$children[0].$refs.tilesetBar.newTileset();
             }},
             { label: 'Open Tileset...', click(item, focusedWindow) {
-                if (focusedWindow) vue.$refs.app.$refs.tilesetBar.openTileset();
+                if (focusedWindow) vue.$children[0].$refs.tilesetBar.openTileset();
             }},
             { type: 'separator' },
             { label: 'Save', click(item, focusedWindow) {
-                if (focusedWindow) vue.$refs.app.$refs.tilesetBar.saveTileset();
+                if (focusedWindow) vue.$children[0].$refs.tilesetBar.saveTileset();
             }},
             { label: 'Save as...', click(item, focusedWindow) {
-                if (focusedWindow) vue.$refs.app.$refs.tilesetBar.saveTilesetAs();
+                if (focusedWindow) vue.$children[0].$refs.tilesetBar.saveTilesetAs();
             }}
         ]
     },{

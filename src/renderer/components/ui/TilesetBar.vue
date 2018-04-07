@@ -55,14 +55,15 @@ export default {
     computed: {
       filteredTiles () {
         let self = this;
-        return self.tileset.tiles.filter(function(tile){
+        return self.tileset.tiles.filter((tile) => {
           return tile.id.indexOf(self.filter) !== -1;
         });  
       }
     },
     data() {
         return {
-            filter: ''
+            filter: '',
+            tileSet: this.tileset
         }
     },
 
@@ -116,18 +117,19 @@ export default {
         // Data
 
         importData(raw) {
-            this.tileset = JSON.parse(raw);
+            tileSet = JSON.parse(raw);
         },
 
         exportData() {
-            var data = JSON.stringify(this.tileset);
+            var data = JSON.stringify(tileSet);
             return data;
         },
 
         // Tileset
 
         newTileset() {
-            this.tileset = {
+            debugger
+            this.tileSet = {
                 tiles: [],
                 indexes: [],
                 savepath: ''
@@ -147,14 +149,14 @@ export default {
             var fs = require('fs');
             var data = fs.readFileSync(files[0]);
             this.importData(data)
-            this.tileset.savepath = files[0];
+            tileSet.savepath = files[0];
         },
 
         saveTileset() {
-            if (this.tileset.savepath == '') {
+            if (tileSet.savepath == '') {
                 this.saveTilesetAs();
             } else {
-                fs.writeFile(this.tileset.savepath, this.exportData(), function (err) {
+                fs.writeFile(tileSet.savepath, this.exportData(), function (err) {
                     if (err) throw err;
                 });
             }
@@ -197,7 +199,7 @@ export default {
         },
 
         reimage() {
-            if (this.tileset.indexes.length == 1) {
+            if (tileSet.indexes.length == 1) {
                 var files = dialog.showOpenDialog({
                     title: 'Change image...',
                     buttonLabel: 'Change',
@@ -211,12 +213,12 @@ export default {
                 if (files != undefined) {
                     var image = fs.readFileSync(files[0]);
                     var base64image = new Buffer(image).toString('base64');
-                    var tile = this.tileset.tiles[this.tileset.indexes[0]];
+                    var tile = tileSet.tiles[tileSet.indexes[0]];
                     tile.image = 'data:image/png;base64,' + base64image;
                     this.$emit('remapTileImage', tile);
                 }
             } else {
-                if (this.tileset.indexes.length == 0) {
+                if (tileSet.indexes.length == 0) {
                     dialog.showMessageBox({
                         title: 'Warning...',
                         type: 'warning',
@@ -235,39 +237,39 @@ export default {
         },
 
         add(base64image) {
-            this.tileset.tiles.push({
+            tileSet.tiles.push({
                 image: base64image,
-                ID: "Tile " + this.tileset.tileIndex++,
+                ID: "Tile " + tileSet.tileIndex++,
                 properties: {}
             });
 
             // Get the new index for the new tile
-            var index = this.tileset.tiles.length - 1;
+            var index = tileSet.tiles.length - 1;
 
             // Change selection index
-            this.tileset.indexes = [index];
-            this.$emit('changetile', this.tileset.indexes);
+            tileSet.indexes = [index];
+            this.$emit('changetile', tileSet.indexes);
         },
 
         remove() {
-            this.tileset.indexes.sort().reverse();
-            for (var i in this.tileset.indexes) this.tileset.tiles.splice(this.tileset.indexes[i], 1);
+            tileSet.indexes.sort().reverse();
+            for (var i in tileSet.indexes) tileSet.tiles.splice(tileSet.indexes[i], 1);
 
             // Reset selection to first item
-            this.tileset.indexes = [0];
+            tileSet.indexes = [0];
         },
 
         goto(event, index) {
             if (event.shiftKey) {
-                if (this.tileset.indexes.indexOf(index) != -1) {
-                    this.tileset.indexes.slice(this.tileset.indexes.indexOf(index), 1);
+                if (tileSet.indexes.indexOf(index) != -1) {
+                    tileSet.indexes.slice(tileSet.indexes.indexOf(index), 1);
                 } else {
-                    this.tileset.indexes.push(index);
+                    tileSet.indexes.push(index);
                 }
             } else {
-                this.tileset.indexes = [index];
+                tileSet.indexes = [index];
             }
-            this.$emit('changetile', this.tileset.indexes);
+            this.$emit('changetile', tileSet.indexes);
         }
 
     },
@@ -275,7 +277,7 @@ export default {
     events: {
 
         'opentileset': function(data) {
-            this.tileset = JSON.parse(data);
+            tileSet = JSON.parse(data);
         }
 
     },
