@@ -47,11 +47,16 @@
 </template>
 
 <script>
+  import  {remote} from 'electron';
+  const { dialog } = remote;
+  
   import toolBar from './components/ui/ToolBar.vue'
   import levelCanvas from './components/ui/LevelCanvas.vue'
   import sideBar from './components/ui/SideBar.vue'
   import tilesetBar from './components/ui/TilesetBar.vue'
   import statusBar from './components/ui/StatusBar.vue'
+
+
 
   export default {
     name: 'dapix-levels2',
@@ -64,7 +69,6 @@
     },
         data () {
         return {
-
             showGrid: true,
             tool: 'select',
             zoom: 1,
